@@ -17,4 +17,8 @@ class ChecklistItem {
         self.text = text;
         self.checked = checked;
     }
+    
+    func toggleChecked() -> Void {
+        self.checked = !self.checked
+    }
 }
