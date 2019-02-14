@@ -47,5 +47,11 @@ class ChecklistViewController: UITableViewController {
         cell.textLabel?.text = item.text;
 
     }
+    
+    @IBAction func addDummyTodo(_ sender: Any) {
+    list?.append(ChecklistItem(text: "Dummy"))
+        tableView.insertRows(at: [IndexPath(row: (self.list?.count)! - 1 , section: 0)]  , with: .none)
+    }
+    
 }
 
