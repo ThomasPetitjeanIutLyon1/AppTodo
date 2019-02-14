@@ -53,5 +53,11 @@ class ChecklistViewController: UITableViewController {
         tableView.insertRows(at: [IndexPath(row: (self.list?.count)! - 1 , section: 0)]  , with: .none)
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        self.list?.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath],  with: .none)
+        
+    }
+    
 }
 
