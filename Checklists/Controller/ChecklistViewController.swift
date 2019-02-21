@@ -10,9 +10,15 @@ import UIKit
 
 class ChecklistViewController: UITableViewController {
     
+    
     var list : [ChecklistItem]?
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "addItem"){
+            let controller = (segue.destination as! UINavigationController).topViewController as! AddItemViewController
+            controller.delegate = self
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +55,7 @@ class ChecklistViewController: UITableViewController {
     }
     
     @IBAction func addDummyTodo(_ sender: Any) {
-    list?.append(ChecklistItem(text: "Dummy"))
+        list?.append(ChecklistItem(text: "Dummy"))
         tableView.insertRows(at: [IndexPath(row: (self.list?.count)! - 1 , section: 0)]  , with: .none)
     }
     
@@ -61,3 +67,16 @@ class ChecklistViewController: UITableViewController {
     
 }
 
+extension ChecklistViewController : AddItemViewControllerDelegate{
+    func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
+        controller.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func addItemViewController(_ controller: AddItemViewController, didFinishAddingItem item: ChecklistItem) {
+        list?.append(ChecklistItem(text: item.text))
+        tableView.insertRows(at: [IndexPath(row: (self.list?.count)! - 1 , section: 0)]  , with: .none)
+    }
+    
+    
+}
