@@ -10,6 +10,14 @@ import UIKit
 
 class ChecklistViewController: UITableViewController {
     
+    var documentDirectory: URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    }
+    
+    var dataFileUrl: URL {
+        return documentDirectory.appendingPathComponent("Checklists").appendingPathExtension("json")
+    }
+    
     
     var list : [ChecklistItem] = []
     
@@ -27,10 +35,14 @@ class ChecklistViewController: UITableViewController {
             }
         }
     }
+    
+    override func awakeFromNib() {
+        loadChecklistItems()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        list = [ChecklistItem(text: "salut"),ChecklistItem(text: "sss", checked: true),ChecklistItem(text: "theo", checked: false)]
+        print(self.dataFileUrl)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -72,12 +84,28 @@ class ChecklistViewController: UITableViewController {
         
     }
     
+    func saveChecklistItems(){
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        
+        let data = try? encoder.encode(list)
+    
+        try? data?.write(to: dataFileUrl)
+        
+    }
+    
+    func loadChecklistItems(){
+        let decoder = JSONDecoder()
+        list = try! decoder.decode([ChecklistItem].self, from: try! Data(contentsOf: dataFileUrl))
+    }
 }
 
 extension ChecklistViewController : ItemDetailViewControllerDelegate{
     
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem) {
         tableView.reloadRows(at: [IndexPath(row: list.index(where: { $0 === item })!, section: 0)], with: .none)
+        saveChecklistItems()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -88,6 +116,7 @@ extension ChecklistViewController : ItemDetailViewControllerDelegate{
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAddingItem item: ChecklistItem) {
         list.append(ChecklistItem(text: item.text))
         tableView.insertRows(at: [IndexPath(row: (self.list.count) - 1 , section: 0)]  , with: .none)
+        saveChecklistItems()
         self.dismiss(animated: true, completion: nil)
     }
     
