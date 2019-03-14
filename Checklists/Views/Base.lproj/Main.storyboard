@@ -155,7 +155,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="WYg-Qg-J5g" kind="show" id="MXu-QA-T7a"/>
+                                    <segue destination="WYg-Qg-J5g" kind="show" identifier="showChecklistsItem" id="MXu-QA-T7a"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

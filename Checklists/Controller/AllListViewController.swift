@@ -10,22 +10,34 @@ import UIKit
 
 class AllListViewController:UITableViewController {
     
-    var list : [String] = []
+    var lists : [Checklist] = []
     
+   
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "showChecklistsItem"){
+            if let cell = sender as? UITableViewCell,
+                let indexPath = tableView.indexPath(for: cell){
+                let controller = segue.destination as! ChecklistViewController
+                controller.list = lists[indexPath.row]
+                controller.delegate = self
+            }
+            
+        }
+    }
     
     override func viewDidLoad() {
-        list = ["list1","list2","list3"]
+        lists = [Checklist(name: "salut"),Checklist(name: "hllo"),Checklist(name: "salut")]
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return (self.list.count);
+        return (self.lists.count);
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChecklistsListItem", for: indexPath)
-        cell.textLabel?.text = list[indexPath.row]
+        cell.textLabel?.text = lists[indexPath.row].name
         return cell
     }
     
@@ -34,4 +46,8 @@ class AllListViewController:UITableViewController {
         let cell = tableView.cellForRow(at: indexPath)
         
     }
+}
+
+extension AllListViewController : ChecklistViewControllerDelegate {
+    
 }

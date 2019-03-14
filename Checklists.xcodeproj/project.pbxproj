@@ -17,6 +17,7 @@
 		0857E968221EB87A0004FA57 /* ChecklistItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857E967221EB87A0004FA57 /* ChecklistItemCell.swift */; };
 		08F4CC9E223A5FFA004AE936 /* AllListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4CC9D223A5FFA004AE936 /* AllListViewController.swift */; };
 		08F4CCA0223A600B004AE936 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4CC9F223A600B004AE936 /* ListDetailViewController.swift */; };
+		08F4CCA2223A680F004AE936 /* Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4CCA1223A680F004AE936 /* Checklist.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		0857E967221EB87A0004FA57 /* ChecklistItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItemCell.swift; sourceTree = "<group>"; };
 		08F4CC9D223A5FFA004AE936 /* AllListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListViewController.swift; sourceTree = "<group>"; };
 		08F4CC9F223A600B004AE936 /* ListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
+		08F4CCA1223A680F004AE936 /* Checklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checklist.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			children = (
 				083BBB092215665D006A1755 /* ChecklistItem.swift */,
 				0857E967221EB87A0004FA57 /* ChecklistItemCell.swift */,
+				08F4CCA1223A680F004AE936 /* Checklist.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08F4CCA2223A680F004AE936 /* Checklist.swift in Sources */,
 				08F4CC9E223A5FFA004AE936 /* AllListViewController.swift in Sources */,
 				08F4CCA0223A600B004AE936 /* ListDetailViewController.swift in Sources */,
 				0857E968221EB87A0004FA57 /* ChecklistItemCell.swift in Sources */,
