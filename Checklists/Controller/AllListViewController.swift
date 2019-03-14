@@ -22,6 +22,18 @@ class AllListViewController:UITableViewController {
                 controller.list = lists[indexPath.row]
                 controller.delegate = self
             }
+        }
+        if (segue.identifier == "AddCheckList"){
+                let controller = (segue.destination as! UINavigationController).topViewController as! ListDetailViewController
+                controller.delegate = self
+        }
+        if (segue.identifier == "EditCheckList"){
+            if let cell = sender as? UITableViewCell,
+                let indexPath = tableView.indexPath(for: cell){
+                let controller = (segue.destination as! UINavigationController).topViewController as! ListDetailViewController
+                controller.checklistToEdit = lists[indexPath.row]
+                controller.delegate = self
+            }
             
         }
     }
@@ -49,5 +61,24 @@ class AllListViewController:UITableViewController {
 }
 
 extension AllListViewController : ChecklistViewControllerDelegate {
+    
+}
+
+extension AllListViewController : ListDetailViewControllerDelegate{
+    func listItemDetailViewControllerDidCancel(_ controller: ListDetailViewController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func listItemDetailViewController(_ controller: ListDetailViewController, didFinishAddingItem item: Checklist) {
+        lists.append(Checklist(name: item.name))
+        tableView.insertRows(at: [IndexPath(row: (self.lists.count) - 1 , section: 0)]  , with: .none)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func listItemDetailViewController(_ controller: ListDetailViewController, didFinishEditingItem item: Checklist) {
+        tableView.reloadRows(at: [IndexPath(row: lists.index(where: { $0 === item })!, section: 0)], with: .none)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
 }
