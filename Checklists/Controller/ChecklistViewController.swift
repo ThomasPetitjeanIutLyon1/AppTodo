@@ -15,13 +15,13 @@ class ChecklistViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "addItem"){
-            let controller = (segue.destination as! UINavigationController).topViewController as! AddItemViewController
+            let controller = (segue.destination as! UINavigationController).topViewController as! ItemDetailViewController
             controller.delegate = self
         }
         if (segue.identifier == "editItem"){
             if let cell = sender as? UITableViewCell,
             let indexPath = tableView.indexPath(for: cell){
-                let controller = (segue.destination as! UINavigationController).topViewController as! AddItemViewController
+                let controller = (segue.destination as! UINavigationController).topViewController as! ItemDetailViewController
                 controller.itemToEdit = list[indexPath.row]
                 controller.delegate = self
             }
@@ -74,17 +74,18 @@ class ChecklistViewController: UITableViewController {
     
 }
 
-extension ChecklistViewController : AddItemViewControllerDelegate{
-    func editItemViewController(_ controller: AddItemViewController, didFinishEditingItem item: ChecklistItem) {
+extension ChecklistViewController : ItemDetailViewControllerDelegate{
+    
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem) {
         tableView.reloadRows(at: [IndexPath(row: list.index(where: { $0 === item })!, section: 0)], with: .none)
         self.dismiss(animated: true, completion: nil)
     }
     
-    func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
+    func itemDetailViewControllerDidCancel(_ controller: ItemDetailViewController) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func addItemViewController(_ controller: AddItemViewController, didFinishAddingItem item: ChecklistItem) {
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAddingItem item: ChecklistItem) {
         list.append(ChecklistItem(text: item.text))
         tableView.insertRows(at: [IndexPath(row: (self.list.count) - 1 , section: 0)]  , with: .none)
         self.dismiss(animated: true, completion: nil)
