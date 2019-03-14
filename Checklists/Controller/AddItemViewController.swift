@@ -12,12 +12,30 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     
     var delegate : AddItemViewControllerDelegate?;
 
+    var itemToEdit : ChecklistItem?
+    
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var textField: UITextField!
     @IBAction func Done(_ sender: Any) {
-        delegate?.addItemViewControllerDidCancel(self)
-        delegate?.addItemViewController(self, didFinishAddingItem: ChecklistItem(text : textField.text ?? ""))
+        if itemToEdit != nil {
+            itemToEdit?.text = textField.text!;
+            delegate?.editItemViewController(self, didFinishEditingItem: itemToEdit!)
+        }
+        else {
+            delegate?.addItemViewControllerDidCancel(self)
+            delegate?.addItemViewController(self, didFinishAddingItem: ChecklistItem(text : textField.text ?? ""))
+        }
+        
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if itemToEdit != nil {
+            self.navigationItem.title = "Edit Item"
+            textField.text = itemToEdit?.text
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         textField.becomeFirstResponder()
     }
@@ -40,5 +58,5 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
 protocol AddItemViewControllerDelegate : class {
     func addItemViewControllerDidCancel(_ controller: AddItemViewController)
     func addItemViewController(_ controller: AddItemViewController, didFinishAddingItem item: ChecklistItem)
-    
+    func editItemViewController(_ controller: AddItemViewController, didFinishEditingItem item: ChecklistItem)
 }

@@ -17,13 +17,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ChecklistItem" id="mKO-r5-z3S">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="ChecklistItem" id="mKO-r5-z3S" customClass="ChecklistItemCell" customModule="Checklists" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" semanticContentAttribute="playback" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mKO-r5-z3S" id="GMz-4Z-fBT">
-                                    <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="307" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XpS-Qy-brQ">
+                                            <rect key="frame" x="37" y="11.5" width="270" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTi-Er-jqb">
+                                            <rect key="frame" x="8" y="7.5" width="21" height="29"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="21" id="aSY-pm-QM5"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="XpS-Qy-brQ" firstAttribute="centerY" secondItem="GMz-4Z-fBT" secondAttribute="centerY" id="cur-hk-PeQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="XpS-Qy-brQ" secondAttribute="trailing" id="gkV-6T-eOk"/>
+                                        <constraint firstItem="XpS-Qy-brQ" firstAttribute="leading" secondItem="LTi-Er-jqb" secondAttribute="trailing" constant="8" id="hEH-B3-ih8"/>
+                                        <constraint firstItem="LTi-Er-jqb" firstAttribute="leading" secondItem="GMz-4Z-fBT" secondAttribute="leading" constant="8" id="lEv-5j-Ljr"/>
+                                        <constraint firstItem="LTi-Er-jqb" firstAttribute="centerY" secondItem="GMz-4Z-fBT" secondAttribute="centerY" id="nPc-Pi-uMk"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cellCheckmark" destination="LTi-Er-jqb" id="HmQ-8a-Ja7"/>
+                                    <outlet property="cellLabel" destination="XpS-Qy-brQ" id="dLS-dE-192"/>
+                                    <segue destination="oO7-sS-nfw" kind="presentation" identifier="editItem" trigger="accessoryAction" id="9AL-mm-SqL"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -147,4 +175,7 @@
             <point key="canvasLocation" x="1885.5999999999999" y="124.58770614692655"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="9AL-mm-SqL"/>
+    </inferredMetricsTieBreakers>
 </document>
