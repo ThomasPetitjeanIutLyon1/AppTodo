@@ -43,12 +43,16 @@ class ChecklistViewController: UITableViewController {
     
     override func awakeFromNib() {
         //loadChecklistItems()
+        
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = list.name
-        print(self.dataFileUrl)
+       
+        self.itemTab = list.items
+        
+        
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -122,7 +126,7 @@ extension ChecklistViewController : ItemDetailViewControllerDelegate{
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAddingItem item: ChecklistItem) {
         itemTab.append(ChecklistItem(text: item.text))
         tableView.insertRows(at: [IndexPath(row: (self.itemTab.count) - 1 , section: 0)]  , with: .none)
-        saveChecklistItems()
+        //saveChecklistItems()
         self.dismiss(animated: true, completion: nil)
     }
     

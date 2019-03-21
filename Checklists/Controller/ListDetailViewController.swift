@@ -23,7 +23,6 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
             delegate?.listItemDetailViewController(self, didFinishEditingItem: checklistToEdit!)
         }
         else {
-            delegate?.listItemDetailViewControllerDidCancel(self)
             delegate?.listItemDetailViewController(self, didFinishAddingItem: Checklist(name : textField.text ?? ""))
         }
     }
