@@ -12,6 +12,8 @@ class Checklist: Codable {
     var name : String
     var items : [ChecklistItem]
     
+    var icon : IconAsset
+    
     var uncheckedItemsCount: Int {
         var i = 0
         
@@ -26,6 +28,7 @@ class Checklist: Codable {
     init(name : String, items:[ChecklistItem] = []) {
         self.name = name
         self.items = items
+        self.icon = IconAsset.NoIcon
     }
     
     
