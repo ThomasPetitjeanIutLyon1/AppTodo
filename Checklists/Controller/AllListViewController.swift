@@ -37,6 +37,7 @@ class AllListViewController:UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        DataModel.instance.sortChecklists()
         tableView.reloadData()
     }
     
