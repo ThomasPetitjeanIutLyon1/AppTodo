@@ -36,6 +36,10 @@ class AllListViewController:UITableViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         
     }
@@ -47,6 +51,15 @@ class AllListViewController:UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChecklistsListItem", for: indexPath)
         cell.textLabel?.text = DataModel.instance.lists[indexPath.row].name
+        if DataModel.instance.lists[indexPath.row].items.count == 0 {
+            cell.detailTextLabel?.text = "(No Item)"
+        }
+        else if DataModel.instance.lists[indexPath.row].uncheckedItemsCount == 0 {
+            cell.detailTextLabel?.text = "All Done!"
+        }
+        else if DataModel.instance.lists[indexPath.row].uncheckedItemsCount > 0 {
+            cell.detailTextLabel?.text = "\(DataModel.instance.lists[indexPath.row].uncheckedItemsCount)" + " remaining"
+        }
         return cell
     }
 }
