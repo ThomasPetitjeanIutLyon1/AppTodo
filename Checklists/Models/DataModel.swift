@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class DataModel {
     static var instance = DataModel()
@@ -22,9 +23,13 @@ class DataModel {
     
     init() {
         loadChecklistItems()
+        NotificationCenter.default.addObserver( self,
+                                                selector: #selector(saveChecklistItems),
+                                                name: UIApplication.didEnterBackgroundNotification,
+                                                object: nil)
     }
     
-    func saveChecklistItems(){
+    @objc func saveChecklistItems(){
         
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
