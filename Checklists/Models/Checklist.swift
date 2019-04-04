@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 class Checklist: Codable {
     var name : String
     var items : [ChecklistItem]
@@ -25,10 +25,10 @@ class Checklist: Codable {
         return i
     }
     
-    init(name : String, items:[ChecklistItem] = []) {
+    init(name : String, items:[ChecklistItem] = [],icon : IconAsset) {
         self.name = name
         self.items = items
-        self.icon = IconAsset.NoIcon
+        self.icon = icon
     }
     
     

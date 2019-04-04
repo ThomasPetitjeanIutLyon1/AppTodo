@@ -61,6 +61,8 @@ class AllListViewController:UITableViewController {
         else if DataModel.instance.lists[indexPath.row].uncheckedItemsCount > 0 {
             cell.detailTextLabel?.text = "\(DataModel.instance.lists[indexPath.row].uncheckedItemsCount)" + " remaining"
         }
+        
+        cell.imageView?.image = DataModel.instance.lists[indexPath.row].icon.image
         return cell
     }
 }
